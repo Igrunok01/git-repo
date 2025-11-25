@@ -8,3 +8,4 @@ def load_numbers(path):
         lines = [l.strip() for l in f if l.strip()]
     a, b = map(float, lines[:2])
     return a, b
+# dev3 patch 1
