@@ -1,6 +1,4 @@
 def safe_div(a, b):
-    if b == 0:
-        return float('inf')
     return a / b
 
 def load_numbers(path):
