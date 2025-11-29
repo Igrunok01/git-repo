@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Документация проекта по CI/CD &#8212; документация CI/CD 1.0.0</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=e35015f7"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=cd1d70c9"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="ci-cd">
+<h1>Документация проекта по CI/CD<a class="headerlink" href="#ci-cd" title="Ссылка на этот заголовок">¶</a></h1>
+<p>Этот сайт документации автоматически генерируется с помощью Sphinx
+и обновляется через CI/CD (GitHub Actions).</p>
+<section id="id1">
+<h2>Содержание<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h2>
+</section>
+<section id="id3">
+<h2>1. Введение<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Проект является учебным и предназначен для демонстрации настройки CI/CD:</p>
+<ul class="simple">
+<li><p>хранение исходного кода и тестов в Git;</p></li>
+<li><p>запуск тестов при каждом коммите и pull request;</p></li>
+<li><p>работа с ветками <code class="docutils literal notranslate"><span class="pre">main</span></code>, <code class="docutils literal notranslate"><span class="pre">development</span></code> и <code class="docutils literal notranslate"><span class="pre">release</span></code>;</p></li>
+<li><p>выпуск версии с помощью тегов;</p></li>
+<li><p>автоматическая генерация документации.</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>2. Структура репозитория<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src/</span></code> — исходный код.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/</span></code> — простые тесты (например, для функции безопасного деления).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data.txt</span></code> — входные данные.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.github/workflows/main.yml</span></code> — конфигурация GitHub Actions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/</span></code> — сюда Sphinx будет генерировать HTML-документацию.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sphinx/</span></code> — исходники документации Sphinx (этот файл и конфиг).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VERSION</span></code> — файл с номером релиза.</p></li>
+</ul>
+</section>
+<section id="ci-cd-github-actions">
+<h2>3. CI/CD и GitHub Actions<a class="headerlink" href="#ci-cd-github-actions" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Workflow <code class="docutils literal notranslate"><span class="pre">CI/CD</span></code> настроен так, чтобы:</p>
+<ul class="simple">
+<li><p>запускаться при <code class="docutils literal notranslate"><span class="pre">push</span></code> в ветки <code class="docutils literal notranslate"><span class="pre">main</span></code>, <code class="docutils literal notranslate"><span class="pre">development</span></code> и <code class="docutils literal notranslate"><span class="pre">release/*</span></code>,
+а также при <code class="docutils literal notranslate"><span class="pre">pull_request</span></code> в <code class="docutils literal notranslate"><span class="pre">main</span></code>;</p></li>
+<li><p>устанавливать Python и зависимости;</p></li>
+<li><p>запускать тесты с помощью <code class="docutils literal notranslate"><span class="pre">pytest</span></code>;</p></li>
+<li><p>собирать документацию Sphinx и коммитить изменения в папке <code class="docutils literal notranslate"><span class="pre">docs/</span></code>
+обратно в репозиторий.</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>4. Ветвление и релизы<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Используются ветки:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">main</span></code> — основная стабильная ветка;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">development</span></code> — ветка для разработки;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">release/v1.0.0</span></code> — ветка для подготовки релиза.</p></li>
+</ul>
+<p>Теги вида <code class="docutils literal notranslate"><span class="pre">v1.0.0</span></code> используются для обозначения выпущенных версий.</p>
+</section>
+<section id="id6">
+<h2>5. Автоматическая документация<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">¶</a></h2>
+<p>При каждом коммите:</p>
+<ul class="simple">
+<li><p>GitHub Actions запускает сборку;</p></li>
+<li><p>тесты выполняются автоматически;</p></li>
+<li><p>Sphinx генерирует HTML-документацию в папку <code class="docutils literal notranslate"><span class="pre">docs/</span></code>;</p></li>
+<li><p>если в документации есть изменения, CI делает коммит от имени бота
+и отправляет их в репозиторий.</p></li>
+</ul>
+<p>Таким образом, документация всегда соответствует текущему состоянию кода.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">CI/CD</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Навигация</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Lavrik.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
