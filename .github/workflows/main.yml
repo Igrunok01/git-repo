@@ -31,11 +31,3 @@ jobs:
       - name: Run tests
         run: |
           pytest
-
-      - name: Generate documentation
-        run: |
-          if [ -f generate_docs.py ]; then
-            python generate_docs.py
-          else
-            echo "generate_docs.py not found, skipping docs generation"
-          fi
